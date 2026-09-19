@@ -9,14 +9,21 @@
         <h1>Products</h1>
 
         <form action="" id="form">
-            <input type="text" name="title" placeholder="Proce" required />
+            <input
+                type="text"
+                name="title"
+                placeholder="Product title"
+                required
+            />
             <br />
-            <button>Add product</button>
+            <input type="number" name="price" placeholder="Price" required />
+            <br />
+            <button>Add</button>
         </form>
 
         <p id="error"></p>
         <ul id="list"></ul>
 
-        <script src="./app.js"></script>
+        <script src="app.js"></script>
     </body>
 </html>
