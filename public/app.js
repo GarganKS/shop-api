@@ -54,18 +54,29 @@ async function refresh() {
 }
 
 const form = document.querySelector("#form");
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(form);
   const title = formData.get("title");
   const price = Number(formData.get("price"));
 
-  fetch("/api/products", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, price }),
-  });
+  try {
+    const response = await fetch("/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, price }),
+    });
+
+    if (!response.ok) {
+      document.querySelector("#error").innerText = response.json();
+    } else {
+      form.reset();
+      refresh();
+    }
+  } catch {
+    document.querySelector("#error").innerText = response.json();
+  }
 });
 
 refresh();
