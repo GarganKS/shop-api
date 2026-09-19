@@ -68,14 +68,16 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ title, price }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      document.querySelector("#error").innerText = response.json();
+      document.querySelector("#error").innerText = data.error;
     } else {
       form.reset();
       refresh();
     }
   } catch {
-    document.querySelector("#error").innerText = response.json();
+    document.querySelector("#error").innerText = data.error;
   }
 });
 
