@@ -53,4 +53,19 @@ async function refresh() {
   }
 }
 
+const form = document.querySelector("#form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const title = formData.get("title");
+  const price = Number(formData.get("price"));
+
+  fetch("/api/products", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, price }),
+  });
+});
+
 refresh();
